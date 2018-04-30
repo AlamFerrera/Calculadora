@@ -1,0 +1,121 @@
+namespace Calculadora2
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Menu();
+            Console.ReadKey();
+        }
+
+        static void Menu()
+        {
+            int respuesta = 0 ;
+            do
+            {
+                Console.WriteLine("\n----------------------------------");
+                Console.WriteLine("MENU CALCULADORA: \n");
+                Console.WriteLine("1) Suma");
+                Console.WriteLine("2) Resta");
+                Console.WriteLine("3) Multiplicacion");
+                Console.WriteLine("4) Division");
+                Console.WriteLine("0) Salir");
+                Console.WriteLine("----------------------------------");
+                Console.WriteLine("\nQue operacion desea realizar?: ");
+            } while (respuesta != 0);
+
+            respuesta = int.Parse(Console.ReadLine());
+
+            switch (respuesta)
+            {
+                case 1:
+                    Calculadora objSuma = new Calculadora(); // instanciacion del objeto
+                    objSuma.MostrarMensaje();
+                    Console.WriteLine(objSuma.GetSuma()); // impresion de los datos
+                    break;
+                case 2:
+                    Calculadora objResta = new Calculadora();
+                    objResta.MostrarMensaje();
+                    Console.Write(objResta.GetResta());
+                    break;
+                case 3:
+                    Calculadora objMultiplicar = new Calculadora();
+                    objMultiplicar.MostrarMensaje();
+                    Console.Write(objMultiplicar.GetMultiplicacion());
+                    break;
+                case 4:
+                    Calculadora objDivision = new Calculadora();
+                    objDivision.GetDivision();
+                    objDivision.MostrarMensaje();
+                    Console.Write(objDivision.GetDivision());
+                    break;
+            }
+            // En caso de querer realizar otra operacion...
+            Console.WriteLine("\nDesea realizar otra operacion ?  Si / No\n");
+            string answer = (Console.ReadLine());
+
+            if(answer == "si" || answer == "SI")
+            {
+                Console.Clear();
+                Menu();
+            }
+            else
+            {
+                Console.WriteLine("\nPresione cualquier tecla para salir...");
+            }
+        }
+    }
+}
+
+class Calculadora
+{
+    private double num1;
+    private double num2;
+    private double resultado;
+
+    // se ingresan los valores
+    public Calculadora()
+    {
+        Console.Write("Digite el primer valor: ");
+        num1 = double.Parse(Console.ReadLine());
+
+        Console.Write("Digite el segundo valor: ");
+        num2 = double.Parse(Console.ReadLine());
+    }
+
+    #region GETTERS
+    public double GetSuma()
+    {
+        return resultado = num1 + num2;        
+    }
+
+    public double GetResta()
+    {
+        return resultado = num1 - num2;
+    }
+
+    public double GetMultiplicacion()
+    {
+        return resultado = num1 * num2;
+    }
+
+    public double GetDivision()
+    {
+        if (num2 == 0)
+        {
+            do
+            {
+                Console.Write("No se puede dividir entre 0, Ingrese otro valor: ");
+                num2 = double.Parse(Console.ReadLine());
+            } while (num2 == 0);           
+        }
+        return num1 / num2;
+       
+    }
+    #endregion
+
+    public void MostrarMensaje()
+    {
+        Console.Write("El resultado es: " );
+    }
+}
